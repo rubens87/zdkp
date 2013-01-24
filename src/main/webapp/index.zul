@@ -1,0 +1,108 @@
+<zk>
+	<style src="css/bootstrap.css" />
+	<window sclass="cardSys" border="none" apply="org.zkoss.bind.BindComposer" 
+	viewModel="@id('uvm') @init('pl.lkedron.data.UsersViewModel')">
+		<hlayout spacing="0" height="600px">
+			<listbox sclass="employee-list" vflex="true" hflex="1"
+            model="@load(uvm.users)" selectedItem="@bind(uvm.selectedUser)" >
+            <auxhead>
+                <auxheader colspan="3" class="topic">RaiderList</auxheader>
+            </auxhead>
+            <listhead>
+                <listheader label="usernam" width="80px" align="center"  sort="auto(username)"/>
+                <listheader label="ilvl" align="center" sort="auto(itemLevel)"/>
+                <listheader label="dkp" width="80px" align="center" sort="auto(points)" />
+            </listhead>
+            <template name="model" var="user">
+                <listitem>
+                    <listcell label="@bind(user.username)" />
+                    <listcell label="@bind(user.itemLevel)" />
+                    <listcell label="@bind(user.points)" />
+                </listitem>
+            </template>
+ 
+        </listbox>			
+				<window sclass="cpreview" title="Uzyszkodnik" hflex="1" vflex="true" border="dotted">
+		     <div sclass="well">
+                
+                <vlayout>
+                    <label sclass="header1" value="@load(uvm.selectedUser.username)" />
+                    <hlayout>
+                    
+                    <div sclass="row">
+	                    <div sclass="well small">
+	                        <label sclass="text-info" value="@load(uvm.selectedUser.itemLevel)" />
+	                        iLvl
+	                    </div>
+	                    <div sclass="well small">
+	                        <label sclass="text-info" value="@load(uvm.selectedUser.points)" />
+	                        points
+	                     </div>
+                     </div>
+                     <div sclass="row">
+                     	<div sclass="well small">
+                     		<label sclass="text-info" value="@load(uvm.selectedUser.position)" />
+                     	</div>
+                     
+                     	<div sclass="well small">
+                     		<label sclass="text-info" value="@load(uvm.selectedUser.clazz)" />
+                     </div>
+                     </div>
+                     
+                    </hlayout>
+                </vlayout>
+            </div>
+				</window>
+		</hlayout>
+		 <grid>
+        <auxhead>
+            <auxheader colspan="4" class="topic">Edytuj uzytkownika</auxheader>
+        </auxhead>
+        <columns>
+            
+         
+            <column label="Username" align="center" />
+            <column label="iLevel" align="center" />
+            <column label="points" align="center" />
+            <column label="class" align="center" />
+            <column label="position" align="center" />
+            <column label="remove" align="center" />
+        </columns>
+        <rows>
+            <row>
+                <textbox value="@bind(uvm.selectedUser.username)" width="95%" />
+              	<intbox value="@bind(uvm.selectedUser.itemLevel)" width="95%" />
+                <intbox value="@bind(uvm.selectedUser.points)" width="95px" />
+                 <textbox value="@bind(uvm.selectedUser.clazz)" width="95%" />
+                  <textbox value="@bind(uvm.selectedUser.position)" width="95%" />
+                <button sclass="btn btn-danger" label="Usun" onClick="@command('removeUser')" />
+            </row>
+        </rows>
+    </grid>
+     <grid>
+        <auxhead>
+            <auxheader colspan="4" class="topic">Edytuj uzytkownika</auxheader>
+        </auxhead>
+        <columns>
+            
+         
+            <column label="Username" align="center" />
+            <column label="iLevel" align="center" />
+            <column label="points" align="center" />
+             <column label="class" align="center" />
+              <column label="position" align="center" />
+            <column label="add" align="center" />
+        </columns>
+        <rows>
+            <row>
+                <textbox value="@bind(uvm.newUser.username)" width="95%" />
+              	<intbox value="@bind(uvm.newUser.itemLevel)" width="95%" />
+                <intbox value="@bind(uvm.newUser.points)" width="95px" />
+                 <textbox value="@bind(uvm.newUser.clazz)" width="95%" />
+                  <textbox value="@bind(uvm.newUser.position)" width="95%" />
+                <button sclass="btn btn-primary" label="Dodaj" onClick="@command('fillUser')" />
+            </row>
+        </rows>
+    </grid>
+	</window>
+</zk>
